@@ -514,6 +514,17 @@ export default class DatePicker extends React.Component {
             minute: getMinutes(this.props.selected),
             second: getSeconds(this.props.selected)
           });
+        } else if (
+          !this.props.selected &&
+          (this.props.showTimeSelect ||
+            this.props.showTimeSelectOnly ||
+            this.props.showTimeInput)
+        ) {
+          changedDate = setTime(new Date(), {
+            hour: getHours(new Date()),
+            minute: getMinutes(new Date()),
+            second: getSeconds(new Date())
+          });
         }
         if (!this.props.inline) {
           this.setState({
@@ -729,11 +740,10 @@ export default class DatePicker extends React.Component {
 
         if (prevMonth !== newMonth || prevYear !== newYear) {
           // month has changed
-          this.setState({ shouldFocusDayInline: true })
-        }
-        else {
+          this.setState({ shouldFocusDayInline: true });
+        } else {
           // month hasn't changed
-          this.setState({ shouldFocusDayInline: false })
+          this.setState({ shouldFocusDayInline: false });
         }
       }
     }
@@ -947,7 +957,7 @@ export default class DatePicker extends React.Component {
       "aria-describedby": this.props.ariaDescribedBy,
       "aria-invalid": this.props.ariaInvalid,
       "aria-labelledby": this.props.ariaLabelledBy,
-      "aria-required": this.props.ariaRequired,
+      "aria-required": this.props.ariaRequired
     });
   };
 

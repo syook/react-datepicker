@@ -280,7 +280,7 @@ export default class Calendar extends React.Component {
   handleDayClick = (day, event, monthSelectedIn) => {
     this.props.onSelect(day, event, monthSelectedIn);
     this.props.setPreSelection && this.props.setPreSelection(day);
-  }   
+  };
 
   handleDayMouseEnter = day => {
     this.setState({ selectingDate: day });
@@ -402,7 +402,10 @@ export default class Calendar extends React.Component {
   decreaseYear = () => {
     this.setState(
       ({ date }) => ({
-        date: subYears(date, this.props.showYearPicker ? this.props.yearItemNumber : 1)
+        date: subYears(
+          date,
+          this.props.showYearPicker ? this.props.yearItemNumber : 1
+        )
       }),
       () => this.handleYearChange(this.state.date)
     );
@@ -482,7 +485,10 @@ export default class Calendar extends React.Component {
   increaseYear = () => {
     this.setState(
       ({ date }) => ({
-        date: addYears(date, this.props.showYearPicker ? this.props.yearItemNumber : 1)
+        date: addYears(
+          date,
+          this.props.showYearPicker ? this.props.yearItemNumber : 1
+        )
       }),
       () => this.handleYearChange(this.state.date)
     );
@@ -653,7 +659,13 @@ export default class Calendar extends React.Component {
   };
 
   renderDefaultHeader = ({ monthDate, i }) => (
-    <div className={`react-datepicker__header ${this.props.showTimeSelect ? 'react-datepicker__header--has-time-select' : ''}`}>
+    <div
+      className={`react-datepicker__header ${
+        this.props.showTimeSelect
+          ? "react-datepicker__header--has-time-select"
+          : ""
+      }`}
+    >
       {this.renderCurrentMonth(monthDate)}
       <div
         className={`react-datepicker__header__dropdown react-datepicker__header__dropdown--${this.props.dropdownMode}`}
@@ -672,9 +684,11 @@ export default class Calendar extends React.Component {
   renderCustomHeader = (headerArgs = {}) => {
     const { monthDate, i } = headerArgs;
 
-    if (this.props.showTimeSelect &&
-      (this.state.monthContainer || this.props.showTimeSelectOnly)) {
-        return null;
+    if (
+      this.props.showTimeSelect &&
+      (this.state.monthContainer || this.props.showTimeSelectOnly)
+    ) {
+      return null;
     }
 
     const prevMonthButtonDisabled = monthDisabledBefore(
@@ -768,7 +782,7 @@ export default class Calendar extends React.Component {
       var monthsToAdd = i - this.props.monthSelectedIn;
       var monthDate = addMonths(fromMonthDate, monthsToAdd);
       var monthKey = `month-${i}`;
-      var monthShowsDuplicateDaysEnd = i < (this.props.monthsShown - 1);
+      var monthShowsDuplicateDaysEnd = i < this.props.monthsShown - 1;
       var monthShowsDuplicateDaysStart = i > 0;
       monthList.push(
         <div
@@ -892,8 +906,10 @@ export default class Calendar extends React.Component {
   };
 
   renderInputTimeSection = () => {
-    const time = new Date(this.props.selected);
-    const timeValid = isValid(time) && Boolean(this.props.selected);
+    const time = this.props.selected
+      ? new Date(this.props.selected)
+      : new Date();
+    const timeValid = isValid(time);
     const timeString = timeValid
       ? `${addZero(time.getHours())}:${addZero(time.getMinutes())}`
       : "";
