@@ -5,8 +5,8 @@ import logo from "./logo.png";
 import DatePicker from "react-datepicker";
 
 const Example = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [startDate, setStartDate] = useState(new Date());
+  const [isOpen, setIsOpen] = useState(false);
+  const [startDate, setStartDate] = useState(null);
   const [isScrolled, setIsScrolled] = useState(true);
 
   useEffect(() => {
@@ -26,7 +26,9 @@ const Example = () => {
     <DatePicker
       open={isOpen && isScrolled}
       selected={startDate}
-      onChange={date => {
+      showTimeInput
+      dateFormat="dd-MMM-yyyy h:mm a"
+      onChange={(date) => {
         setStartDate(date);
         setIsOpen(false);
       }}

@@ -3641,7 +3641,7 @@ var Wr = (function (e) {
                       (n.props.showTimeSelect ||
                         n.props.showTimeSelectOnly ||
                         n.props.showTimeInput) &&
-                      (o = Et(new Date(), {
+                      (o = Et(o, {
                         hour: ke.default(new Date()),
                         minute: we.default(new Date()),
                         second: De.default(new Date()),

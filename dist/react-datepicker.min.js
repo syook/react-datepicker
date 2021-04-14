@@ -3954,7 +3954,7 @@
                           (a.props.showTimeSelect ||
                             a.props.showTimeSelectOnly ||
                             a.props.showTimeInput) &&
-                          (o = Ft(new Date(), {
+                          (o = Ft(o, {
                             hour: Pe.default(new Date()),
                             minute: Me.default(new Date()),
                             second: _e.default(new Date()),
